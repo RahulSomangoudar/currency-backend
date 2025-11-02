@@ -37,7 +37,7 @@ It automatically refreshes data every 60 seconds and provides REST API endpoints
 
 1️⃣ Clone the repository
 
-git clone https://github.com/<your-username>/currency-backend.git
+git clone https://github.com/RahulSomangoudar/currency-backend.git
 
 cd currency-backend
 
@@ -117,7 +117,7 @@ Response:
 
    Example:
 
-   https://currency-api.onrender.com/quotes?currency=ARS
+   https://currency-api-tbtf.onrender.com/quotes?currency=ARS
 
 4. Click SEND.
 
@@ -129,15 +129,15 @@ You can save these as a collection for easy testing.
 
 Get quotes:
 
-curl https://currency-api.onrender.com/quotes?currency=ARS
+curl https://currency-api-tbtf.onrender.com/quotes?currency=ARS
 
 Get average:
 
-curl https://currency-api.onrender.com/average?currency=BRL
+curl https://currency-api-tbtf.onrender.com/average?currency=BRL
 
 Get slippage:
 
-curl https://currency-api.onrender.com/slippage?currency=ARS
+curl https://currency-api-tbtf.onrender.com/slippage?currency=ARS
 
 Example output:
 [
