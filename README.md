@@ -1,35 +1,158 @@
+💱 Currency Quotes API (USD → ARS / BRL)
 
-# Currency Quotes API (USD → ARS / BRL)
+This Node.js backend project fetches live USD exchange rates from multiple sources for both ARS (Argentina) and BRL (Brazil).
+It automatically refreshes data every 60 seconds and provides REST API endpoints.
 
-This Node.js project fetches USD exchange quotes from 3 sources per currency (ARS and BRL),
-keeps them refreshed every 60 seconds, and exposes three endpoints:
+------------------------------------------------------------
+🚀 Features
+------------------------------------------------------------
+✅ Fetches real exchange rates from 3 sources per currency (ARS & BRL)
+✅ Refreshes automatically every 60 seconds
+✅ Stores latest data in a local SQLite database
+✅ Provides 3 main API endpoints:
+   • /quotes  → list of all fetched rates
+   • /average → average buy/sell price
+   • /slippage → % difference from the average
 
-- `GET /quotes?currency=ARS|BRL` — returns array of quotes from the three sources
-- `GET /average?currency=ARS|BRL` — returns average buy/sell
-- `GET /slippage?currency=ARS|BRL` — returns slippage of each source vs average
+------------------------------------------------------------
+⚙️ Tech Stack
+------------------------------------------------------------
+• Node.js + Express
+• Axios + Cheerio for web scraping
+• SQLite3 for caching recent quotes
+• Deployed on Render
 
-## How to run locally
+------------------------------------------------------------
+🧩 Project Setup
+------------------------------------------------------------
 
-1. Extract the zip and open a terminal in the project folder.
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the server:
-   ```bash
-   npm start
-   ```
-4. Server runs on port 3000 by default. Examples:
-   - `http://localhost:3000/quotes?currency=ARS`
-   - `http://localhost:3000/average?currency=BRL`
-   - `http://localhost:3000/slippage?currency=ARS`
+1️⃣ Clone the repository
+git clone https://github.com/<your-username>/currency-backend.git
+cd currency-backend
 
-## Deploy
+2️⃣ Install dependencies
+npm install
 
-You can deploy to Render, Heroku, Railway or any Node.js host. Make sure to set the start command to `npm start`.
-If using Docker, build and run using the included `Dockerfile`.
+3️⃣ Run the server locally
+npm start
 
-## Notes
+The API will start on: http://localhost:3000
 
-- The scraping code uses `axios` + `cheerio`. Site HTML may change; if a parser breaks, check the corresponding fetcher file in `src/fetchers/`.
-- The app caches data in an SQLite file `db.sqlite`. It refreshes automatically every 60 seconds.
+------------------------------------------------------------
+🌐 Deployment (Render)
+------------------------------------------------------------
+1. Push your repo to GitHub.
+2. Go to https://render.com → “New +” → Web Service
+3. Choose your repo.
+4. Set:
+   • Build command → npm install
+   • Start command → npm start
+5. Click Deploy.
+
+You’ll get a live URL like:
+https://currency-api.onrender.com
+
+------------------------------------------------------------
+📡 API Endpoints
+------------------------------------------------------------
+All endpoints accept a query parameter: currency=ARS or BRL
+
+🟢 Get quotes
+GET /quotes?currency=ARS
+GET /quotes?currency=BRL
+
+Response:
+[
+  {
+    "source": "https://www.dolarhoy.com",
+    "buy_price": 1425,
+    "sell_price": 1445,
+    "fetched_at": "2025-11-02T06:46:54.912Z"
+  }
+]
+
+🟠 Get average
+GET /average?currency=ARS
+
+Response:
+{
+  "average_buy_price": 1427.3,
+  "average_sell_price": 1446.2
+}
+
+🔵 Get slippage
+GET /slippage?currency=ARS
+
+Response:
+[
+  {
+    "source": "https://www.dolarhoy.com",
+    "buy_price_slippage": 0.004,
+    "sell_price_slippage": -0.006
+  }
+]
+
+------------------------------------------------------------
+🧠 Data Refresh Policy
+------------------------------------------------------------
+• The backend refreshes quotes every 60 seconds automatically.
+• The fetched_at timestamp (UTC) shows when data was last updated.
+• SQLite keeps only the most recent values for each currency.
+
+------------------------------------------------------------
+🧪 How to Test
+------------------------------------------------------------
+
+🔸 Using Postman:
+1. Open Postman.
+2. Create a new GET request.
+   Example:
+   https://currency-api.onrender.com/quotes?currency=ARS
+3. Click SEND.
+4. You’ll see live JSON output.
+
+You can save these as a collection for easy testing.
+
+🔸 Using cURL (Command Line):
+
+Get quotes:
+curl https://currency-api.onrender.com/quotes?currency=ARS
+
+Get average:
+curl https://currency-api.onrender.com/average?currency=BRL
+
+Get slippage:
+curl https://currency-api.onrender.com/slippage?currency=ARS
+
+Example output:
+[
+  {
+    "source": "https://www.dolarhoy.com",
+    "buy_price_slippage": 0.004,
+    "sell_price_slippage": -0.006
+  }
+]
+
+------------------------------------------------------------
+🕓 Time Format
+------------------------------------------------------------
+All timestamps use UTC (Coordinated Universal Time).
+For India (IST), add +5 hours 30 minutes.
+
+Example:
+2025-11-02T06:46:54.912Z = 2025-11-02 12:16:54 PM IST
+
+------------------------------------------------------------
+✅ Summary
+------------------------------------------------------------
+Feature            | Status
+------------------ | ---------------------
+Auto Refresh       | ✅ Every 60 seconds
+API Hosted         | ✅ Render
+Frontend Required  | ❌ Not required
+Database           | ✅ SQLite3 (auto-created)
+
+------------------------------------------------------------
+Author: Rahul Somangoudar
+Deployment URL: https://currency-api.onrender.com
+------------------------------------------------------------
