@@ -7,19 +7,28 @@ It automatically refreshes data every 60 seconds and provides REST API endpoints
 🚀 Features
 ------------------------------------------------------------
 ✅ Fetches real exchange rates from 3 sources per currency (ARS & BRL)
+
 ✅ Refreshes automatically every 60 seconds
+
 ✅ Stores latest data in a local SQLite database
+
 ✅ Provides 3 main API endpoints:
+
    • /quotes  → list of all fetched rates
+   
    • /average → average buy/sell price
+   
    • /slippage → % difference from the average
 
 ------------------------------------------------------------
 ⚙️ Tech Stack
 ------------------------------------------------------------
 • Node.js + Express
+
 • Axios + Cheerio for web scraping
+
 • SQLite3 for caching recent quotes
+
 • Deployed on Render
 
 ------------------------------------------------------------
@@ -27,30 +36,21 @@ It automatically refreshes data every 60 seconds and provides REST API endpoints
 ------------------------------------------------------------
 
 1️⃣ Clone the repository
+
 git clone https://github.com/<your-username>/currency-backend.git
+
 cd currency-backend
 
 2️⃣ Install dependencies
+
 npm install
 
 3️⃣ Run the server locally
+
 npm start
 
 The API will start on: http://localhost:3000
 
-------------------------------------------------------------
-🌐 Deployment (Render)
-------------------------------------------------------------
-1. Push your repo to GitHub.
-2. Go to https://render.com → “New +” → Web Service
-3. Choose your repo.
-4. Set:
-   • Build command → npm install
-   • Start command → npm start
-5. Click Deploy.
-
-You’ll get a live URL like:
-https://currency-api.onrender.com
 
 ------------------------------------------------------------
 📡 API Endpoints
@@ -58,7 +58,9 @@ https://currency-api.onrender.com
 All endpoints accept a query parameter: currency=ARS or BRL
 
 🟢 Get quotes
+
 GET /quotes?currency=ARS
+
 GET /quotes?currency=BRL
 
 Response:
@@ -72,6 +74,7 @@ Response:
 ]
 
 🟠 Get average
+
 GET /average?currency=ARS
 
 Response:
@@ -81,6 +84,7 @@ Response:
 }
 
 🔵 Get slippage
+
 GET /slippage?currency=ARS
 
 Response:
@@ -96,7 +100,9 @@ Response:
 🧠 Data Refresh Policy
 ------------------------------------------------------------
 • The backend refreshes quotes every 60 seconds automatically.
+
 • The fetched_at timestamp (UTC) shows when data was last updated.
+
 • SQLite keeps only the most recent values for each currency.
 
 ------------------------------------------------------------
@@ -104,24 +110,33 @@ Response:
 ------------------------------------------------------------
 
 🔸 Using Postman:
+
 1. Open Postman.
+
 2. Create a new GET request.
+
    Example:
+
    https://currency-api.onrender.com/quotes?currency=ARS
-3. Click SEND.
-4. You’ll see live JSON output.
+
+4. Click SEND.
+
+5. You’ll see live JSON output.
 
 You can save these as a collection for easy testing.
 
 🔸 Using cURL (Command Line):
 
 Get quotes:
+
 curl https://currency-api.onrender.com/quotes?currency=ARS
 
 Get average:
+
 curl https://currency-api.onrender.com/average?currency=BRL
 
 Get slippage:
+
 curl https://currency-api.onrender.com/slippage?currency=ARS
 
 Example output:
@@ -154,5 +169,5 @@ Database           | ✅ SQLite3 (auto-created)
 
 ------------------------------------------------------------
 Author: Rahul Somangoudar
-Deployment URL: https://currency-api.onrender.com
+Deployment URL: (https://currency-api-tbtf.onrender.com/quotes?currency=BRL)
 ------------------------------------------------------------
